@@ -91,20 +91,8 @@ public class LinkedQueue<E> implements Queue {
      */
     @java.lang.Override
     public void reverse() {
-//        LinkedQueue tempQueue1 = new LinkedQueue();
-//        LinkedQueue tempQueue2 = new LinkedQueue();
-//
-//        while(!this.isEmpty()){
-//            tempQueue1.offer(this.poll());
-//        }
-//
-//        while(!tempQueue1.isEmpty()){
-//            tempQueue2.offer((tempQueue1.poll()));
-//        }
-//
-//        while(!tempQueue2.isEmpty()){
-//            this.offer(tempQueue2.poll());
-//        }
+        this.transfer(this);
+
     }
 
     /**
@@ -121,7 +109,21 @@ public class LinkedQueue<E> implements Queue {
     public void merge(Queue from) {
         if(from == null) return;
 
-        LinkedQueue tempQueue1 = new LinkedQueue();
+        LinkedQueue tempQueue = new LinkedQueue();
+        SinglyLinkedList copysll = new SinglyLinkedList();
 
+        from.transfer(tempQueue);
+        tempQueue.reverse();
+
+        for(int i = 0; i < tempQueue.size(); i++){
+            copysll.addLast(tempQueue.sll.get(i));
+        }
+
+        tempQueue.transfer(from);
+        from.reverse();
+
+        while(!copysll.isEmpty()){
+            this.offer(copysll.removeFirst());
+        }
     }
 }

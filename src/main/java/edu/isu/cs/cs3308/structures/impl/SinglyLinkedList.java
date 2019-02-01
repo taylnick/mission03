@@ -55,7 +55,6 @@ public class SinglyLinkedList<E> implements List<E> {
             tail = newNode;
             size++;
         }
-
     }
 
     /**

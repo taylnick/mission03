@@ -25,6 +25,21 @@ public class StackScan {
      * null, or if the stack is emtpy.
      */
     public static <E> boolean scanStack(final Stack<E> stack, E element) {
-        throw new UnsupportedOperationException("Not yet implemented");
+        if(stack == null || stack.isEmpty() || element == null) return false;
+        boolean isfound = false;
+
+        LinkedQueue<E> q = new LinkedQueue();
+
+        while(!stack.isEmpty()){
+            if(stack.peek() == element) isfound = true;
+            q.offer(stack.pop());
+        }
+
+        q.reverse();
+
+        stack.push((E) q.poll());
+
+
+        return isfound;
     }
 }

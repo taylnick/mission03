@@ -3,10 +3,12 @@ package edu.isu.cs.cs3308.structures.impl;
 import edu.isu.cs.cs3308.structures.Queue;
 import java.lang.*;
 
-public class LinkedQueue<E> implements Queue {
+public class LinkedQueue<E> implements Queue<E> {
 
 
-    private SinglyLinkedList sll = new SinglyLinkedList();
+    private SinglyLinkedList<E> sll;
+
+    public LinkedQueue() {sll = new SinglyLinkedList<E>();}
 
     /**
      * @return The number of elements in the queue
@@ -30,7 +32,7 @@ public class LinkedQueue<E> implements Queue {
      * @param element Element to be inserted.
      */
     @java.lang.Override
-    public void offer(java.lang.Object element) {
+    public void offer(E element) {
         sll.addLast(element);
     }
 
@@ -39,7 +41,7 @@ public class LinkedQueue<E> implements Queue {
      * null if empty.
      */
     @java.lang.Override
-    public java.lang.Object peek() {
+    public E peek() {
         return sll.first();
     }
 
@@ -48,7 +50,7 @@ public class LinkedQueue<E> implements Queue {
      * null if empty.
      */
     @java.lang.Override
-    public java.lang.Object poll() {
+    public E poll() {
         return sll.removeFirst();
     }
 
@@ -123,7 +125,7 @@ public class LinkedQueue<E> implements Queue {
         from.reverse();
 
         while(!copysll.isEmpty()){
-            this.offer(copysll.removeFirst());
+            this.offer((E) copysll.removeFirst());
         }
     }
 }

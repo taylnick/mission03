@@ -25,8 +25,8 @@ public class StackScan {
      * null, or if the stack is emtpy.
      */
     public static <E> boolean scanStack(final Stack<E> stack, E element) {
-        if(stack == null || stack.isEmpty() || element == null) return false;
         boolean isfound = false;
+        if(stack == null || stack.isEmpty() || element == null) return isfound;
 
         LinkedQueue<E> q = new LinkedQueue();
 
@@ -36,9 +36,9 @@ public class StackScan {
         }
 
         q.reverse();
-
-        stack.push((E) q.poll());
-
+        while(!q.isEmpty()) {
+            stack.push(q.poll());
+        }
 
         return isfound;
     }
